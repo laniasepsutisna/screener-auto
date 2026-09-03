@@ -1,0 +1,3 @@
+# Shared dependencies for all screeners
+yfinance>=0.2.40
+curl_cffi>=0.7.0

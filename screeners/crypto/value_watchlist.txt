@@ -1,0 +1,21 @@
+# CoinGecko coin IDs (bukan symbol) — untuk --universe watchlist
+bitcoin
+ethereum
+solana
+cardano
+avalanche-2
+polkadot
+chainlink
+uniswap
+aave
+maker
+near
+aptos
+sui
+cosmos
+litecoin
+bitcoin-cash
+filecoin
+arbitrum
+optimism
+injective-protocol

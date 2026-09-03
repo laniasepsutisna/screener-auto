@@ -1,0 +1,7 @@
+# Tambahan ticker blue-chip value untuk mode --fast (di luar guru preset Stockbit).
+# Satu ticker per baris. Baris # diabaikan.
+# Built-in watchlist sudah mencakup INDY, KBLI, NCKL, SMGR, PTBA, CTRA, dll.
+#
+# Contoh tambahan manual:
+# HRUM
+# MEDC

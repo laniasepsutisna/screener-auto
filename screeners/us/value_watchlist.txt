@@ -1,0 +1,6 @@
+# Extra tickers digabung ke universe liquid/value/mega
+# Satu ticker per baris. Gunakan bentuk Yahoo: BRK-B (bukan BRK.B)
+# Contoh:
+# JCI
+# GD
+# NOC

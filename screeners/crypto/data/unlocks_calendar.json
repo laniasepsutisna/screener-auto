@@ -1,0 +1,17 @@
+{
+  "updated": "2026-09-03",
+  "source": "seed — berita Tokenomist/Gate/BeInCrypto (ganti dengan API key untuk data live)",
+  "events": [
+    {"coin_id": "sui", "symbol": "SUI", "date": "2026-09-03", "tokens": 24142139, "pct_mcap": 0.6, "note": "monthly cliff"},
+    {"coin_id": "sui", "symbol": "SUI", "date": "2026-10-03", "tokens": null, "pct_mcap": 0.6, "note": "monthly"},
+    {"coin_id": "ethena", "symbol": "ENA", "date": "2026-09-02", "tokens": 40630000, "pct_circ": 0.46, "note": "foundation"},
+    {"coin_id": "hyperliquid", "symbol": "HYPE", "date": "2026-09-06", "tokens": 9920000, "pct_circ": 2.37, "note": "team unlock besar"},
+    {"coin_id": "eigenlayer", "symbol": "EIGEN", "date": "2026-09-01", "tokens": 36920000, "pct_circ": 5.48, "note": "minggu ini"},
+    {"coin_id": "aptos", "symbol": "APT", "date": "2026-09-12", "tokens": 11300000, "pct_circ": null, "note": "monthly"},
+    {"coin_id": "starknet", "symbol": "STRK", "date": "2026-09-15", "tokens": 64000000, "pct_circ": null, "note": "contributors"},
+    {"coin_id": "arbitrum", "symbol": "ARB", "date": "2026-09-16", "tokens": 92630000, "pct_supply": 0.93, "note": "investor/team"},
+    {"coin_id": "ondo-finance", "symbol": "ONDO", "date": "2026-09-18", "tokens": 73000000, "pct_circ": null, "note": "RWA unlock"},
+    {"coin_id": "layerzero", "symbol": "ZRO", "date": "2026-09-20", "tokens": 28000000, "pct_circ": null, "note": "investor"},
+    {"coin_id": "kaito", "symbol": "KAITO", "date": "2026-09-20", "tokens": 17800000, "pct_circ": null, "note": "low float"}
+  ]
+}

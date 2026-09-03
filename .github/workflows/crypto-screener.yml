@@ -1,0 +1,65 @@
+name: Crypto Undervalued Screener
+
+on:
+  schedule:
+    # Setiap hari jam 06:00 WIB (23:00 UTC hari sebelumnya)
+    - cron: '0 23 * * *'
+  workflow_dispatch:
+    inputs:
+      universe:
+        description: 'Universe crypto (top100, top200, layer1, defi)'
+        default: 'top100'
+        type: choice
+        options: [top100, top200, layer1, defi]
+      limit:
+        description: 'Jumlah top coin'
+        default: '20'
+
+env:
+  PYTHONIOENCODING: utf-8
+
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run Crypto screener
+        run: |
+          UNIVERSE="${{ inputs.universe || 'top100' }}"
+          LIMIT="${{ inputs.limit || '20' }}"
+          TODAY=$(date +%Y-%m-%d)
+
+          # Run screener → markdown report
+          python screeners/crypto/scripts/crypto_undervalued_screener.py \
+            --universe "$UNIVERSE" --limit "$LIMIT" \
+            --format markdown --output "reports/crypto/${TODAY}.md"
+
+          # Copy sebagai latest
+          cp "reports/crypto/${TODAY}.md" reports/crypto/latest.md
+
+          # Run screener → JSON
+          python screeners/crypto/scripts/crypto_undervalued_screener.py \
+            --universe "$UNIVERSE" --limit "$LIMIT" \
+            --format json --output "reports/crypto/${TODAY}.json"
+
+      - name: Commit & push reports
+        run: |
+          git config user.name "screener-bot"
+          git config user.email "screener-bot@github-actions"
+          git add reports/crypto/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🪙 Crypto report $(date +%Y-%m-%d)"
+            git push
+          fi
