@@ -1,0 +1,47 @@
+services:
+  # IDX Screener — Senin-Jumat 16:30 WIB (09:30 UTC)
+  - type: cron
+    name: screener-idx
+    runtime: python
+    schedule: "30 9 * * 1-5"
+    buildCommand: pip install -r requirements.txt
+    startCommand: bash run_screener.sh idx
+    envVars:
+      - key: STOCKBIT_TOKEN
+        sync: false
+      - key: PYTHONIOENCODING
+        value: utf-8
+      - key: IDX_UNIVERSE
+        value: IHSG
+      - key: IDX_LIMIT
+        value: "30"
+
+  # Crypto Screener — Setiap hari 06:00 WIB (23:00 UTC)
+  - type: cron
+    name: screener-crypto
+    runtime: python
+    schedule: "0 23 * * *"
+    buildCommand: pip install -r requirements.txt
+    startCommand: bash run_screener.sh crypto
+    envVars:
+      - key: PYTHONIOENCODING
+        value: utf-8
+      - key: CRYPTO_UNIVERSE
+        value: top100
+      - key: CRYPTO_LIMIT
+        value: "20"
+
+  # US Screener — Senin-Jumat 22:00 WIB (15:00 UTC)
+  - type: cron
+    name: screener-us
+    runtime: python
+    schedule: "0 15 * * 1-5"
+    buildCommand: pip install -r requirements.txt
+    startCommand: bash run_screener.sh us
+    envVars:
+      - key: PYTHONIOENCODING
+        value: utf-8
+      - key: US_UNIVERSE
+        value: liquid
+      - key: US_LIMIT
+        value: "30"
