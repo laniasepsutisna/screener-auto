@@ -7,13 +7,18 @@ on:
   workflow_dispatch:
     inputs:
       universe:
-        description: 'Universe crypto (top100, top200, layer1, defi)'
+        description: 'Universe crypto'
         default: 'top100'
         type: choice
-        options: [top100, top200, layer1, defi]
+        options:
+          - top100
+          - top200
+          - layer1
+          - defi
       limit:
         description: 'Jumlah top coin'
         default: '20'
+        type: string
 
 env:
   PYTHONIOENCODING: utf-8
@@ -39,15 +44,12 @@ jobs:
           LIMIT="${{ inputs.limit || '20' }}"
           TODAY=$(date +%Y-%m-%d)
 
-          # Run screener → markdown report
           python screeners/crypto/scripts/crypto_undervalued_screener.py \
             --universe "$UNIVERSE" --limit "$LIMIT" \
             --format markdown --output "reports/crypto/${TODAY}.md"
 
-          # Copy sebagai latest
           cp "reports/crypto/${TODAY}.md" reports/crypto/latest.md
 
-          # Run screener → JSON
           python screeners/crypto/scripts/crypto_undervalued_screener.py \
             --universe "$UNIVERSE" --limit "$LIMIT" \
             --format json --output "reports/crypto/${TODAY}.json"

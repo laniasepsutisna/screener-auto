@@ -7,13 +7,18 @@ on:
   workflow_dispatch:
     inputs:
       universe:
-        description: 'Universe saham US (liquid, sp500, tech, value)'
+        description: 'Universe saham US'
         default: 'liquid'
         type: choice
-        options: [liquid, sp500, tech, value]
+        options:
+          - liquid
+          - sp500
+          - tech
+          - value
       limit:
         description: 'Jumlah top saham'
         default: '30'
+        type: string
 
 env:
   PYTHONIOENCODING: utf-8
@@ -43,15 +48,12 @@ jobs:
           LIMIT="${{ inputs.limit || '30' }}"
           TODAY=$(date +%Y-%m-%d)
 
-          # Run screener → markdown report
           python screeners/us/scripts/us_undervalued_screener.py \
             --universe "$UNIVERSE" --limit "$LIMIT" \
             --format markdown --output "reports/us/${TODAY}.md"
 
-          # Copy sebagai latest
           cp "reports/us/${TODAY}.md" reports/us/latest.md
 
-          # Run screener → JSON
           python screeners/us/scripts/us_undervalued_screener.py \
             --universe "$UNIVERSE" --limit "$LIMIT" \
             --format json --output "reports/us/${TODAY}.json"

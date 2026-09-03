@@ -4,10 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       screeners:
-        description: 'Screener mana yang mau dijalankan'
+        description: 'Screener mana yang dijalankan'
         default: 'all'
         type: choice
-        options: [all, idx, crypto, us]
+        options:
+          - all
+          - idx
+          - crypto
+          - us
 
 env:
   PYTHONIOENCODING: utf-8
@@ -42,7 +46,6 @@ jobs:
             echo "$STOCKBIT_TOKEN" > ~/.stockbit_token
           fi
 
-          # IDX
           if [ "$CHOICE" = "all" ] || [ "$CHOICE" = "idx" ]; then
             echo "▶ Running IDX screener..."
             python screeners/idx/scripts/tuntun_undervalued_screener.py \
@@ -51,7 +54,6 @@ jobs:
             [ -f "reports/idx/${TODAY}.md" ] && cp "reports/idx/${TODAY}.md" reports/idx/latest.md
           fi
 
-          # Crypto (delay untuk CoinGecko rate limit)
           if [ "$CHOICE" = "all" ] || [ "$CHOICE" = "crypto" ]; then
             echo "▶ Running Crypto screener..."
             python screeners/crypto/scripts/crypto_undervalued_screener.py \
@@ -60,7 +62,6 @@ jobs:
             [ -f "reports/crypto/${TODAY}.md" ] && cp "reports/crypto/${TODAY}.md" reports/crypto/latest.md
           fi
 
-          # US
           if [ "$CHOICE" = "all" ] || [ "$CHOICE" = "us" ]; then
             echo "▶ Running US screener..."
             python screeners/us/scripts/us_undervalued_screener.py \

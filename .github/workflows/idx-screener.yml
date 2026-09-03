@@ -7,13 +7,18 @@ on:
   workflow_dispatch:
     inputs:
       universe:
-        description: 'Universe saham (IHSG, LQ45, IDX30, Value100)'
+        description: 'Universe saham'
         default: 'IHSG'
         type: choice
-        options: [IHSG, LQ45, IDX30, Value100]
+        options:
+          - IHSG
+          - LQ45
+          - IDX30
+          - Value100
       limit:
         description: 'Jumlah top saham'
         default: '30'
+        type: string
 
 env:
   PYTHONIOENCODING: utf-8
@@ -45,20 +50,16 @@ jobs:
           LIMIT="${{ inputs.limit || '30' }}"
           TODAY=$(date +%Y-%m-%d)
 
-          # Buat stockbit token file kalau ada
           if [ -n "$STOCKBIT_TOKEN" ]; then
             echo "$STOCKBIT_TOKEN" > ~/.stockbit_token
           fi
 
-          # Run screener → markdown report
           python screeners/idx/scripts/tuntun_undervalued_screener.py \
             --universe "$UNIVERSE" --limit "$LIMIT" \
             --format markdown --output "reports/idx/${TODAY}.md"
 
-          # Copy juga sebagai latest
           cp "reports/idx/${TODAY}.md" reports/idx/latest.md
 
-          # Run screener → JSON (untuk dry-run tracking)
           python screeners/idx/scripts/tuntun_undervalued_screener.py \
             --universe "$UNIVERSE" --limit "$LIMIT" \
             --format json --output "reports/idx/${TODAY}.json"
