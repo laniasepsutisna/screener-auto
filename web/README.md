@@ -14,17 +14,30 @@ Buka [http://localhost:3000](http://localhost:3000).
 
 ## Deploy Vercel (gratis `*.vercel.app`)
 
-1. Push repo ke GitHub (sudah: `laniasepsutisna/screener-auto`)
-2. Buka [vercel.com/new](https://vercel.com/new) → Import repo
-3. **Root Directory:** `web`
-4. Framework: Next.js (otomatis)
-5. Deploy
+Production: https://screener-auto.vercel.app  
+Project Vercel: `screener-dashboard` · **Root Directory:** `web`
+
+### Auto-rebuild saat push (wajib sekali)
+
+1. Install **Vercel GitHub App**: https://github.com/apps/vercel/installations/new  
+   - Pilih akun `laniasepsutisna`  
+   - Beri akses ke repo `screener-auto` (atau All repositories)
+2. Di folder `web/`, jalankan:
+
+```powershell
+./scripts/connect-github.ps1
+```
+
+Setelah itu, setiap push ke `main` (termasuk update `reports/`) akan rebuild otomatis.
+
+### Manual deploy
+
+```bash
+cd web
+npx vercel --prod
+```
 
 Data laporan di-load dari `reports/` (lokal) atau GitHub raw saat build di Vercel.
-
-URL contoh: `https://screener-auto.vercel.app`
-
-Setiap push ke `main` akan rebuild otomatis.
 
 ## Catatan
 
