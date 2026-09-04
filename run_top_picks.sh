@@ -14,6 +14,16 @@ cd "$ROOT"
 export PYTHONIOENCODING=utf-8
 export PYTHONUNBUFFERED=1
 
+# Cloud/Linux images often ship python3 only; Windows/local may have `python`.
+if command -v python3 >/dev/null 2>&1; then
+  PYTHON=python3
+elif command -v python >/dev/null 2>&1; then
+  PYTHON=python
+else
+  echo "python3/python tidak ditemukan di PATH" >&2
+  exit 1
+fi
+
 STRICTNESS="${STRICTNESS:-balanced}"
 LIMIT="${LIMIT:-5}"
 SKIP_IDX="${SKIP_IDX:-0}"
@@ -64,7 +74,7 @@ if [ "$SKIP_IDX" != "1" ]; then
   echo "=== IDX top picks + QC ==="
   IDX_JSON="${TMP_DIR}/idx.json"
   IDX_MD="${TMP_DIR}/idx.md"
-  if python screeners/idx/scripts/idx_yahoo_screener.py \
+  if "$PYTHON" screeners/idx/scripts/idx_yahoo_screener.py \
       --universe liquid \
       --min-pct "$MIN_PCT" \
       --min-quality "$MIN_Q_STOCK" \
@@ -72,7 +82,7 @@ if [ "$SKIP_IDX" != "1" ]; then
       --format json \
       --output "$IDX_JSON" \
       >"${RAW_DIR}/idx-screener.log" 2>&1; then
-    if python screeners/idx/scripts/qc_enrichment.py \
+    if "$PYTHON" screeners/idx/scripts/qc_enrichment.py \
         --from-json "$IDX_JSON" \
         --no-idx \
         --print-screener \
@@ -81,7 +91,7 @@ if [ "$SKIP_IDX" != "1" ]; then
       cp "$IDX_MD" "reports/idx/${TODAY}.md"
       cp "$IDX_MD" reports/idx/latest.md
     else
-      if python screeners/idx/scripts/idx_yahoo_screener.py \
+      if "$PYTHON" screeners/idx/scripts/idx_yahoo_screener.py \
           --universe liquid \
           --min-pct "$MIN_PCT" \
           --min-quality "$MIN_Q_STOCK" \
@@ -107,7 +117,7 @@ fi
 if [ "$SKIP_US" != "1" ]; then
   echo "=== US top picks ==="
   US_MD="${TMP_DIR}/us.md"
-  if python screeners/us/scripts/us_undervalued_screener.py \
+  if "$PYTHON" screeners/us/scripts/us_undervalued_screener.py \
       --universe liquid \
       --min-pct "$MIN_PCT" \
       --min-quality "$MIN_Q_STOCK" \
@@ -128,7 +138,7 @@ fi
 if [ "$SKIP_CRYPTO" != "1" ]; then
   echo "=== Crypto top picks (safe) ==="
   CRYPTO_MD="${TMP_DIR}/crypto.md"
-  if python screeners/crypto/scripts/crypto_undervalued_screener.py \
+  if "$PYTHON" screeners/crypto/scripts/crypto_undervalued_screener.py \
       --universe top100 \
       --min-pct "$MIN_PCT" \
       --min-quality "$MIN_Q_CRYPTO" \
@@ -146,7 +156,7 @@ if [ "$SKIP_CRYPTO" != "1" ]; then
   echo "Crypto status: $ST_CRYPTO"
 fi
 
-python assemble_top_picks.py \
+"$PYTHON" assemble_top_picks.py \
   --today "$TODAY" \
   --strictness "$STRICTNESS" \
   --limit "$LIMIT" \
