@@ -41,7 +41,13 @@ Deploy gratis ke `*.vercel.app`:
 2. Set **Root Directory** = `web`
 3. Deploy
 
-Update portfolio di web: copy `~/.cursor/skills/portfolio-review/reports/latest.md` → `reports/portfolio/`, lalu push `main` (auto-rebuild Vercel).
+Update portfolio di web:
+
+```powershell
+& "$env:USERPROFILE\.cursor\skills\portfolio-review\portfolio_review.ps1" -PushWeb
+```
+
+Atau: `web/scripts/sync-portfolio.ps1 -Push`
 
 Detail: [`web/README.md`](web/README.md)
 

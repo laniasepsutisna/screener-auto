@@ -39,6 +39,23 @@ npx vercel --prod
 
 Data laporan di-load dari `reports/` (lokal) atau GitHub raw saat build di Vercel.
 
+### Update Portfolio otomatis
+
+Dari skill `portfolio-review`:
+
+```powershell
+# Review + copy ke repo + push (Vercel rebuild)
+& "$env:USERPROFILE\.cursor\skills\portfolio-review\portfolio_review.ps1" -PushWeb
+
+# Atau sync saja tanpa push:
+.\scripts\sync-portfolio.ps1
+.\scripts\sync-portfolio.ps1 -Push
+```
+
+### Security headers
+
+Production mengirim: `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, `Content-Security-Policy` (+ HSTS dari Vercel).
+
 ## Catatan
 
 - Data dibaca dari `../reports/*/latest.md` saat build
