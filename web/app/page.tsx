@@ -3,7 +3,7 @@ import { loadAllReports } from "@/lib/reports";
 
 export const dynamic = "force-static";
 
-export default function HomePage() {
-  const reports = loadAllReports();
+export default async function HomePage() {
+  const reports = await loadAllReports();
   return <Dashboard reports={reports} />;
 }

@@ -1,12 +1,7 @@
 import type { NextConfig } from "next";
-import path from "path";
 
 const nextConfig: NextConfig = {
-  // Allow reading markdown reports from repo root ../reports
-  outputFileTracingRoot: path.join(__dirname, ".."),
-  outputFileTracingIncludes: {
-    "/": ["../reports/**/*"],
-  },
+  // Static dashboard; report markdown loaded at build (local fs or GitHub raw)
 };
 
 export default nextConfig;

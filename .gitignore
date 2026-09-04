@@ -29,3 +29,4 @@ web/out/
 
 logs/
 _tmp/
+.vercel
