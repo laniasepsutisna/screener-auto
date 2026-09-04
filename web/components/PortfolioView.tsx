@@ -179,8 +179,10 @@ export default function PortfolioView({ portfolio }: Props) {
       }) + " WIB"
     : "—";
 
-  const idxBook = books.find((b) => b.id === "idx");
-  const heroRet = idxBook?.portfolio_return_pct;
+  const heroRet = active?.portfolio_return_pct;
+  const heroLabel = active?.label
+    ? `${active.label} return (live)`
+    : "Return (live)";
 
   if (!portfolio.available && !live?.books?.length && !loading) {
     return (
@@ -225,7 +227,7 @@ export default function PortfolioView({ portfolio }: Props) {
           </p>
         </div>
         <div className={styles.heroStat} aria-live="polite">
-          <span className={styles.heroStatLabel}>IDX return (live)</span>
+          <span className={styles.heroStatLabel}>{heroLabel}</span>
           <strong className={`${styles.heroStatValue} ${retTone(heroRet)}`}>
             {fmtPct(heroRet)}
           </strong>
