@@ -31,7 +31,7 @@ Output: `reports/top-picks/YYYY-MM-DD.md` + `latest.md`
 ## Cursor Automation (cloud)
 
 1. Repo: `laniasepsutisna/screener-auto` · branch `main`
-2. Trigger: Senin–Jumat **07:30 WIB** (`30 0 * * 1-5` UTC)
+2. Trigger: Senin–Jumat **08:00 WIB** (`0 1 * * 1-5` UTC)
 3. Agent: jalankan `./run_top_picks.sh`, lalu commit & push laporan di `reports/`
 
 Lihat instruksi lengkap di draft Automation di Cursor.
