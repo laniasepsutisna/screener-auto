@@ -110,11 +110,53 @@ async function yahooQuotes(
 ): Promise<Map<string, { price: number | null; prev: number | null }>> {
   const map = new Map<string, { price: number | null; prev: number | null }>();
   const unique = [...new Set(symbols.filter(Boolean))];
-  await Promise.all(
-    unique.map(async (sym) => {
-      map.set(sym, await yahooChart(sym));
-    })
-  );
+  if (!unique.length) return map;
+
+  // Batch quote (cepat); fallback per-symbol chart jika gagal
+  try {
+    const url = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(
+      unique.join(",")
+    )}`;
+    const res = await fetch(url, {
+      headers: { "User-Agent": UA, Accept: "application/json" },
+      cache: "no-store",
+    });
+    if (res.ok) {
+      const json = (await res.json()) as {
+        quoteResponse?: {
+          result?: Array<{
+            symbol?: string;
+            regularMarketPrice?: number;
+            regularMarketPreviousClose?: number;
+          }>;
+        };
+      };
+      for (const q of json.quoteResponse?.result ?? []) {
+        if (!q.symbol) continue;
+        map.set(q.symbol, {
+          price:
+            typeof q.regularMarketPrice === "number"
+              ? q.regularMarketPrice
+              : null,
+          prev:
+            typeof q.regularMarketPreviousClose === "number"
+              ? q.regularMarketPreviousClose
+              : null,
+        });
+      }
+    }
+  } catch {
+    /* fall through */
+  }
+
+  const missing = unique.filter((s) => !map.has(s) || map.get(s)?.price == null);
+  if (missing.length) {
+    await Promise.all(
+      missing.map(async (sym) => {
+        map.set(sym, await yahooChart(sym));
+      })
+    );
+  }
   return map;
 }
 

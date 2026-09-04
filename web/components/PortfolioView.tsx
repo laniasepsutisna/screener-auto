@@ -242,41 +242,46 @@ export default function PortfolioView({ portfolio }: Props) {
       )}
 
       <section className={styles.summaryGrid} aria-label="Ringkasan lintas pasar">
-        {(books.length ? books : []).map((b) => (
-          <article key={b.id} className={styles.summaryCard}>
-            <div className={styles.summaryTop}>
-              <strong>{b.label}</strong>
-              <span className={`${styles.badge} ${styles.badgeLive}`}>LIVE</span>
-            </div>
-            <p
-              className={`${styles.summaryRet} ${retTone(b.portfolio_return_pct)}`}
-            >
-              {fmtPct(b.portfolio_return_pct)}
-              <small className={styles.summaryPnl}>
-                {" "}
-                · {fmtMoney(b.portfolio_pnl, b.currency)}
-              </small>
-            </p>
-            <small>
-              Menang {b.winners}/{b.positions.length}
-              {b.review_at ? ` · review ${b.review_at}` : ""}
-            </small>
-          </article>
-        ))}
-        {!books.length && portfolio.summaryRows.map((row) => (
-          <article key={row.market} className={styles.summaryCard}>
-            <div className={styles.summaryTop}>
-              <strong>{row.market}</strong>
-              <span className={`${styles.badge} ${styles.badgeNeutral}`}>
-                {loading ? "…" : row.status}
-              </span>
-            </div>
-            <p className={`${styles.summaryRet} ${retTone(row.returnPct)}`}>
-              {row.ret || "—"}
-            </p>
-            <small>{row.benchmark || "—"}</small>
-          </article>
-        ))}
+        {books.length
+          ? books.map((b) => (
+              <article key={b.id} className={styles.summaryCard}>
+                <div className={styles.summaryTop}>
+                  <strong>{b.label}</strong>
+                  <span className={`${styles.badge} ${styles.badgeLive}`}>LIVE</span>
+                </div>
+                <p
+                  className={`${styles.summaryRet} ${retTone(b.portfolio_return_pct)}`}
+                >
+                  {fmtPct(b.portfolio_return_pct)}
+                  <small className={styles.summaryPnl}>
+                    {" "}
+                    · {fmtMoney(b.portfolio_pnl, b.currency)}
+                  </small>
+                </p>
+                <small>
+                  Menang {b.winners}/{b.positions.length}
+                  {b.review_at ? ` · review ${b.review_at}` : ""}
+                </small>
+              </article>
+            ))
+          : ["IDX", "US", "Crypto"].map((label) => (
+              <article key={label} className={styles.summaryCard}>
+                <div className={styles.summaryTop}>
+                  <strong>{label}</strong>
+                  <span className={`${styles.badge} ${styles.badgeNeutral}`}>
+                    {loading ? "…" : "—"}
+                  </span>
+                </div>
+                <p className={styles.summaryRet}>
+                  {loading ? "Mengambil harga live…" : "Belum ada data"}
+                </p>
+                <small>
+                  {error
+                    ? "Gagal fetch — coba Refresh"
+                    : "Yahoo · CoinGecko · ~20s refresh"}
+                </small>
+              </article>
+            ))}
       </section>
 
       {portfolio.priorityNote && (
