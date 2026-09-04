@@ -1,0 +1,16 @@
+{
+  "name": "Screener Auto",
+  "install": "pip install --user -r requirements.txt && npm ci --prefix web",
+  "terminals": [
+    {
+      "name": "web-dashboard",
+      "command": "cd web && npm run dev"
+    }
+  ],
+  "ports": [
+    {
+      "name": "web-dashboard",
+      "port": 3000
+    }
+  ]
+}
