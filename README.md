@@ -35,7 +35,7 @@ UI interaktif ada di folder [`web/`](web/) — tab IDX/US/Crypto, filter, sort.
 Deploy gratis ke `*.vercel.app`:
 
 1. Import repo di [vercel.com/new](https://vercel.com/new)
-2. Set **Root Directory** = `web`
+2. **Root Directory** kosongkan (pakai `vercel.json` di root)
 3. Deploy
 
 Detail: [`web/README.md`](web/README.md)
