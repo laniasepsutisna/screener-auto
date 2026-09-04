@@ -50,8 +50,22 @@ Dari skill `portfolio-review`:
 # Atau sync saja tanpa push:
 .\scripts\sync-portfolio.ps1
 .\scripts\sync-portfolio.ps1 -Push
+
+# Sync entry snapshot saja (untuk live price)
+.\scripts\sync-positions.ps1
+.\scripts\sync-positions.ps1 -Push
 ```
 
+### Portfolio LIVE
+
+Tab **Portfolio** memanggil `/api/portfolio/live` setiap ~20 detik:
+
+- IDX / US harga: Yahoo Finance (`.JK` / ticker US)
+- Crypto: CoinGecko
+- Entry & weight dari `public/data/positions.json` (bukan markdown statis)
+- Kolom **Hari ini** = fluktuasi vs previous close; **Return** = vs harga entry
+
+Markdown `reports/portfolio/latest.md` tetap ada sebagai fallback/arsip.
 ### Security headers
 
 Production mengirim: `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, `Content-Security-Policy` (+ HSTS dari Vercel).

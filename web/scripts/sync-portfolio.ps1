@@ -1,10 +1,10 @@
 # Sync portfolio-review skill report -> screener-auto/reports/portfolio/
+# + positions.json untuk live price API di web
 # Optional: commit + push main agar Vercel rebuild otomatis.
 #
 # Contoh:
 #   .\sync-portfolio.ps1
 #   .\sync-portfolio.ps1 -Push
-#   .\sync-portfolio.ps1 -Push -Message "Update portfolio review 2026-09-04"
 
 param(
   [string]$SkillReports = "$env:USERPROFILE\.cursor\skills\portfolio-review\reports",
@@ -36,7 +36,10 @@ if (Test-Path $datedSrc) {
   Copy-Item (Join-Path $Dest "latest.md") $datedDest -Force
 }
 
-Write-Host "Synced -> $Dest" -ForegroundColor Green
+# Entry snapshot untuk /api/portfolio/live
+& (Join-Path $PSScriptRoot "sync-positions.ps1")
+
+Write-Host "Synced -> $Dest (+ positions.json)" -ForegroundColor Green
 
 if (-not $Push) {
   Write-Host "Tip: jalankan dengan -Push untuk commit & push ke main (auto-rebuild Vercel)." -ForegroundColor DarkGray
@@ -45,7 +48,11 @@ if (-not $Push) {
 
 Push-Location $RepoRoot
 try {
-  git add -- "reports/portfolio/latest.md" "reports/portfolio/$today.md"
+  git add -- `
+    "reports/portfolio/latest.md" `
+    "reports/portfolio/$today.md" `
+    "reports/portfolio/positions.json" `
+    "web/public/data/positions.json"
   $staged = git diff --cached --name-only
   if (-not $staged) {
     Write-Host "Tidak ada perubahan portfolio untuk di-commit." -ForegroundColor Yellow
@@ -53,7 +60,7 @@ try {
   }
 
   if (-not $Message) {
-    $Message = "Update portfolio review report $today."
+    $Message = "Update portfolio review + live positions $today."
   }
 
   git commit -m $Message

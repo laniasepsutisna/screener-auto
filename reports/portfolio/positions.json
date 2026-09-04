@@ -1,0 +1,187 @@
+{
+  "synced_at": "2026-09-04T14:23:46+07:00",
+  "mode": "Paper",
+  "books": {
+    "idx": {
+      "id": "idx",
+      "label": "IDX",
+      "currency": "IDR",
+      "portfolio_id": "dry-run-week1b-qc-2026-09-03",
+      "entry_date": "2026-09-03",
+      "review_at": "2026-09-10",
+      "capital": 100000000.0,
+      "positions": [
+        {
+          "symbol": "INKP",
+          "yahoo": "INKP.JK",
+          "name": "Indah Kiat Pulp & Paper Tbk.",
+          "weight_pct": 20.0,
+          "entry_price": 8941.44,
+          "stop_loss": 7868,
+          "take_profit": 19537,
+          "quality": "Best",
+          "thesis": "Value terdalam (54%) + triple signal murah + QC WTP"
+        },
+        {
+          "symbol": "CTRA",
+          "yahoo": "CTRA.JK",
+          "name": "Ciputra Development Tbk.",
+          "weight_pct": 20.0,
+          "entry_price": 621.19,
+          "stop_loss": 547,
+          "take_profit": 1306,
+          "quality": "Best",
+          "thesis": "Value 52% Best + properti likuid + QC WTP (diversifikasi batubara)"
+        },
+        {
+          "symbol": "BMRI",
+          "yahoo": "BMRI.JK",
+          "name": "Bank Mandiri (Persero) Tbk.",
+          "weight_pct": 20.0,
+          "entry_price": 4360.38,
+          "stop_loss": 3837,
+          "take_profit": 7354,
+          "quality": "Best",
+          "thesis": "Blue chip bank Best + QC WTP + undervalued 40%"
+        },
+        {
+          "symbol": "PTBA",
+          "yahoo": "PTBA.JK",
+          "name": "Bukit Asam Tbk.",
+          "weight_pct": 20.0,
+          "entry_price": 2715.14,
+          "stop_loss": 2389,
+          "take_profit": 4543,
+          "quality": "Best",
+          "thesis": "Value 39% Best + PEG murah + QC WTP (mark-to-market dari versi A)"
+        },
+        {
+          "symbol": "BBRI",
+          "yahoo": "BBRI.JK",
+          "name": "Bank Rakyat Indonesia (Persero) Tbk.",
+          "weight_pct": 20.0,
+          "entry_price": 3398.53,
+          "stop_loss": 2991,
+          "take_profit": 3816,
+          "quality": "Best",
+          "thesis": "Bank likuid Best + QC WTP (ganti ADRO/ITMG)"
+        }
+      ]
+    },
+    "us": {
+      "id": "us",
+      "label": "US",
+      "currency": "USD",
+      "portfolio_id": "paper-us-v1-2026-09-03",
+      "entry_date": "2026-09-03",
+      "review_at": "2026-09-10",
+      "capital": 10000.0,
+      "cash_pct": 20.0,
+      "positions": [
+        {
+          "symbol": "T",
+          "yahoo": "T",
+          "name": "AT&T Inc.",
+          "weight_pct": 16.0,
+          "entry_price": 25.95,
+          "stop_loss": 22.84,
+          "take_profit": 44.87,
+          "quality": "Bagus",
+          "thesis": "Bagus · UV 42% · Beli · fwd_value_pe · PER 8.6 / FwdPE 10.1"
+        },
+        {
+          "symbol": "PYPL",
+          "yahoo": "PYPL",
+          "name": "PayPal Holdings, Inc.",
+          "weight_pct": 16.0,
+          "entry_price": 54.67,
+          "stop_loss": 48.11,
+          "take_profit": 88.32,
+          "quality": "Bagus",
+          "thesis": "Bagus · UV 38% · Beli selektif · value_pe · PER 9.9 / FwdPE 9.4"
+        },
+        {
+          "symbol": "UPS",
+          "yahoo": "UPS",
+          "name": "United Parcel Service, Inc.",
+          "weight_pct": 16.0,
+          "entry_price": 103.01,
+          "stop_loss": 90.65,
+          "take_profit": 141.31,
+          "quality": "Bagus",
+          "thesis": "Bagus · UV 27% · Beli selektif · fwd_value_pe · PER 19.1 / FwdPE 12.8"
+        },
+        {
+          "symbol": "WFC",
+          "yahoo": "WFC",
+          "name": "Wells Fargo & Company",
+          "weight_pct": 16.0,
+          "entry_price": 89.27,
+          "stop_loss": 78.56,
+          "take_profit": 112.8,
+          "quality": "Bagus",
+          "thesis": "Bagus · UV 21% · Tunggu & amati · value_pe · PER 12.7 / FwdPE 11.3"
+        },
+        {
+          "symbol": "COP",
+          "yahoo": "COP",
+          "name": "ConocoPhillips",
+          "weight_pct": 16.0,
+          "entry_price": 137.2,
+          "stop_loss": 120.74,
+          "take_profit": 166.75,
+          "quality": "Best",
+          "thesis": "Best · UV 18% · Beli selektif · fwd_value_pe · PER 18.0 / FwdPE 14.4"
+        }
+      ]
+    },
+    "crypto": {
+      "id": "crypto",
+      "label": "Crypto",
+      "currency": "USD",
+      "portfolio_id": "paper-v2-2026-09-03",
+      "entry_date": "2026-09-03",
+      "review_at": "2026-09-10",
+      "capital": 10000.0,
+      "cash_pct": 88.2,
+      "positions": [
+        {
+          "symbol": "ALGO",
+          "coingecko_id": "algorand",
+          "name": "Algorand",
+          "weight_pct": 2.6,
+          "entry_price": 0.092688,
+          "stop_loss": 0.08287794,
+          "take_profit": 0.185376,
+          "quality": "Bagus",
+          "thesis": "Bagus · underval 94% · TA Selektif · Grade B · R:R 9.45",
+          "allocation_usd": 260.0
+        },
+        {
+          "symbol": "BCH",
+          "coingecko_id": "bitcoin-cash",
+          "name": "Bitcoin Cash",
+          "weight_pct": 4.4,
+          "entry_price": 247.76,
+          "stop_loss": 229.524864,
+          "take_profit": 357.25810693,
+          "quality": "Bagus",
+          "thesis": "Bagus · underval 31% · TA Selektif · Grade A · R:R 6.0",
+          "allocation_usd": 440.0
+        },
+        {
+          "symbol": "DOGE",
+          "coingecko_id": "dogecoin",
+          "name": "Dogecoin",
+          "weight_pct": 4.8,
+          "entry_price": 0.083125,
+          "stop_loss": 0.07822063,
+          "take_profit": 0.10390625,
+          "quality": "Best",
+          "thesis": "Best · underval 11% · TA Selektif · Grade A · R:R 4.24",
+          "allocation_usd": 480.0
+        }
+      ]
+    }
+  }
+}
