@@ -12,6 +12,7 @@ import styles from "./dashboard.module.css";
 
 type Props = {
   reports: MarketReport[];
+  embedded?: boolean;
 };
 
 type SortDir = "asc" | "desc";
@@ -31,7 +32,7 @@ function uvTone(pct: number): string {
   return styles.uvCool;
 }
 
-export default function Dashboard({ reports }: Props) {
+export default function Dashboard({ reports, embedded = false }: Props) {
   const available = reports.filter((r) => r.available);
   const [market, setMarket] = useState<MarketId>(
     available[0]?.id ?? reports[0]?.id ?? "idx"
@@ -110,7 +111,7 @@ export default function Dashboard({ reports }: Props) {
     uvCol && filtered[0] ? parsePercent(filtered[0][uvCol]) : Number.NaN;
 
   return (
-    <div className={styles.shell}>
+    <div className={embedded ? undefined : styles.shell}>
       <header className={styles.hero}>
         <div className={styles.brandBlock}>
           <p className={styles.eyebrow}>screener-auto · live dari GitHub</p>
@@ -258,10 +259,12 @@ export default function Dashboard({ reports }: Props) {
         )}
       </section>
 
-      <p className={styles.disclaimer}>
-        Heuristik Tuntun-style. Bukan saran investasi. Deploy gratis di Vercel
-        dari repo GitHub.
-      </p>
+      {!embedded && (
+        <p className={styles.disclaimer}>
+          Heuristik Tuntun-style. Bukan saran investasi. Deploy gratis di Vercel
+          dari repo GitHub.
+        </p>
+      )}
     </div>
   );
 }

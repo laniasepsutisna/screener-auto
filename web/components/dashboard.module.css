@@ -5,6 +5,107 @@
   animation: rise-in 0.55s ease both;
 }
 
+.viewSwitch {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem;
+  padding: 0.3rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(244, 247, 250, 0.8);
+}
+
+.viewTab,
+.viewTabActive {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  border-radius: 999px;
+  padding: 0.55rem 1.1rem;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.viewTab small,
+.viewTabActive small {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+.viewTabActive {
+  background: var(--ink);
+  color: #f4f8fb;
+}
+
+.metaInline {
+  margin: 0.65rem 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.summaryCard {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.summaryTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.summaryRet {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.summaryCard small {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.priorityNote {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.retPos {
+  color: #0f7a5a;
+}
+
+.retNeg {
+  color: #b42318;
+}
+
+.retFlat {
+  color: var(--ink);
+}
+
+
 .hero {
   display: grid;
   grid-template-columns: 1.4fr 0.8fr;
@@ -336,6 +437,10 @@
     grid-template-columns: 1fr;
   }
 
+  .summaryGrid {
+    grid-template-columns: 1fr;
+  }
+
   .filters {
     grid-template-columns: 1fr;
   }
@@ -346,5 +451,10 @@
 
   .updated {
     white-space: normal;
+  }
+
+  .viewSwitch {
+    display: grid;
+    width: 100%;
   }
 }

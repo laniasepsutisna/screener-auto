@@ -30,13 +30,18 @@ Output: `reports/top-picks/YYYY-MM-DD.md` + `latest.md`
 
 ## Web dashboard (Vercel)
 
-UI interaktif ada di folder [`web/`](web/) — tab IDX/US/Crypto, filter, sort.
+UI interaktif ada di folder [`web/`](web/) — dua mode:
+
+1. **Top Picks** — tab IDX / US / Crypto (screener undervalued)
+2. **Portfolio** — review paper trade lintas pasar (dari skill `portfolio-review`)
 
 Deploy gratis ke `*.vercel.app`:
 
 1. Import repo di [vercel.com/new](https://vercel.com/new)
 2. Set **Root Directory** = `web`
 3. Deploy
+
+Update portfolio di web: copy `~/.cursor/skills/portfolio-review/reports/latest.md` → `reports/portfolio/`, lalu push `main` (auto-rebuild Vercel).
 
 Detail: [`web/README.md`](web/README.md)
 
