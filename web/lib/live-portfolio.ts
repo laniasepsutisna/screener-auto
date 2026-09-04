@@ -5,6 +5,7 @@ import type {
   LivePortfolioPayload,
   LivePosition,
 } from "./live-portfolio-types";
+import { coingeckoPrices, yahooQuotes } from "./market-prices";
 
 export type {
   LiveBook,
@@ -44,9 +45,6 @@ type PositionsFile = {
   books: Record<string, RawBook>;
 };
 
-const UA =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
-
 function loadPositionsFile(): PositionsFile {
   const candidates = [
     path.join(process.cwd(), "public", "data", "positions.json"),
@@ -60,130 +58,6 @@ function loadPositionsFile(): PositionsFile {
     }
   }
   throw new Error("positions.json tidak ditemukan — sync portfolio dulu");
-}
-
-async function yahooChart(symbol: string): Promise<{
-  price: number | null;
-  prev: number | null;
-}> {
-  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(
-    symbol
-  )}?interval=1m&range=1d`;
-  try {
-    const res = await fetch(url, {
-      headers: { "User-Agent": UA, Accept: "application/json" },
-      next: { revalidate: 0 },
-      cache: "no-store",
-    });
-    if (!res.ok) return { price: null, prev: null };
-    const json = (await res.json()) as {
-      chart?: {
-        result?: Array<{
-          meta?: {
-            regularMarketPrice?: number;
-            previousClose?: number;
-            chartPreviousClose?: number;
-          };
-        }>;
-      };
-    };
-    const meta = json.chart?.result?.[0]?.meta;
-    if (!meta) return { price: null, prev: null };
-    const price =
-      typeof meta.regularMarketPrice === "number"
-        ? meta.regularMarketPrice
-        : null;
-    const prev =
-      typeof meta.chartPreviousClose === "number"
-        ? meta.chartPreviousClose
-        : typeof meta.previousClose === "number"
-          ? meta.previousClose
-          : null;
-    return { price, prev };
-  } catch {
-    return { price: null, prev: null };
-  }
-}
-
-async function yahooQuotes(
-  symbols: string[]
-): Promise<Map<string, { price: number | null; prev: number | null }>> {
-  const map = new Map<string, { price: number | null; prev: number | null }>();
-  const unique = [...new Set(symbols.filter(Boolean))];
-  if (!unique.length) return map;
-
-  // Batch quote (cepat); fallback per-symbol chart jika gagal
-  try {
-    const url = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(
-      unique.join(",")
-    )}`;
-    const res = await fetch(url, {
-      headers: { "User-Agent": UA, Accept: "application/json" },
-      cache: "no-store",
-    });
-    if (res.ok) {
-      const json = (await res.json()) as {
-        quoteResponse?: {
-          result?: Array<{
-            symbol?: string;
-            regularMarketPrice?: number;
-            regularMarketPreviousClose?: number;
-          }>;
-        };
-      };
-      for (const q of json.quoteResponse?.result ?? []) {
-        if (!q.symbol) continue;
-        map.set(q.symbol, {
-          price:
-            typeof q.regularMarketPrice === "number"
-              ? q.regularMarketPrice
-              : null,
-          prev:
-            typeof q.regularMarketPreviousClose === "number"
-              ? q.regularMarketPreviousClose
-              : null,
-        });
-      }
-    }
-  } catch {
-    /* fall through */
-  }
-
-  const missing = unique.filter((s) => !map.has(s) || map.get(s)?.price == null);
-  if (missing.length) {
-    await Promise.all(
-      missing.map(async (sym) => {
-        map.set(sym, await yahooChart(sym));
-      })
-    );
-  }
-  return map;
-}
-
-async function coingeckoPrices(
-  ids: string[]
-): Promise<Map<string, number>> {
-  const map = new Map<string, number>();
-  const unique = [...new Set(ids.filter(Boolean))];
-  if (!unique.length) return map;
-  const url = `https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(
-    unique.join(",")
-  )}&vs_currencies=usd`;
-  try {
-    const res = await fetch(url, {
-      headers: { Accept: "application/json", "User-Agent": UA },
-      cache: "no-store",
-    });
-    if (!res.ok) return map;
-    const json = (await res.json()) as Record<string, { usd?: number }>;
-    for (const id of unique) {
-      const p = json[id]?.usd;
-      if (typeof p === "number") map.set(id, p);
-    }
-  } catch {
-    /* ignore */
-  }
-  return map;
 }
 
 function hintFor(
