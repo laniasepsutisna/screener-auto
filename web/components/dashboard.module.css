@@ -1,0 +1,350 @@
+.shell {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+  animation: rise-in 0.55s ease both;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  gap: 1.5rem;
+  align-items: end;
+  margin-bottom: 1.25rem;
+}
+
+.brandBlock {
+  max-width: 42rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cyan-deep);
+}
+
+.brand {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 7vw, 4.4rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.tagline {
+  margin: 0.85rem 0 0;
+  max-width: 36rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.heroStat {
+  background: var(--ink);
+  color: #f2f7fb;
+  border-radius: calc(var(--radius) + 4px);
+  padding: 1.1rem 1.25rem 1.2rem;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 0.2rem;
+  justify-items: start;
+  animation: tick 0.5s ease 0.15s both;
+}
+
+.heroStatLabel {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+.heroStatValue {
+  font-family: var(--font-mono);
+  font-size: clamp(2.4rem, 6vw, 3.4rem);
+  line-height: 1;
+  color: #7de3ef;
+}
+
+.heroStatMeta {
+  font-size: 0.88rem;
+  opacity: 0.8;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.tab,
+.tabActive {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: rgba(244, 247, 250, 0.75);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  text-align: left;
+  cursor: pointer;
+  display: grid;
+  gap: 0.15rem;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.tab:hover:not(:disabled),
+.tabActive {
+  transform: translateY(-1px);
+}
+
+.tab:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.tabActive {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #f4f8fb;
+}
+
+.tab span,
+.tabActive span {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.tab small,
+.tabActive small {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 2px);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.panelHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.2rem 1.25rem 0.4rem;
+}
+
+.panelHead h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+}
+
+.panelHead p {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.updated {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--cyan-deep);
+  white-space: nowrap;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 0.8fr;
+  gap: 0.75rem;
+  padding: 0.85rem 1.25rem 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.field input,
+.field select {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 10px;
+  padding: 0.65rem 0.75rem;
+  color: var(--ink);
+}
+
+.field input:focus,
+.field select:focus,
+.sortBtn:focus-visible,
+.tab:focus-visible,
+.tabActive:focus-visible {
+  outline: 2px solid rgba(10, 143, 158, 0.45);
+  outline-offset: 2px;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border-top: 1px solid var(--line);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+  font-size: 0.92rem;
+}
+
+.table th,
+.table td {
+  padding: 0.72rem 0.9rem;
+  border-bottom: 1px solid rgba(183, 199, 214, 0.55);
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.table th {
+  background: #eef3f7;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.table tbody tr {
+  transition: background 0.12s ease;
+}
+
+.table tbody tr:hover {
+  background: rgba(10, 143, 158, 0.06);
+}
+
+.sortBtn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.uv {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.98rem;
+}
+
+.uvHot {
+  color: var(--cyan-deep);
+}
+
+.uvWarm {
+  color: var(--amber);
+}
+
+.uvCool {
+  color: var(--muted);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.badgeGood {
+  background: rgba(31, 122, 76, 0.12);
+  color: var(--good);
+  border-color: rgba(31, 122, 76, 0.25);
+}
+
+.badgeMid {
+  background: rgba(10, 143, 158, 0.12);
+  color: var(--cyan-deep);
+  border-color: rgba(10, 143, 158, 0.25);
+}
+
+.badgeWarn {
+  background: rgba(178, 59, 74, 0.1);
+  color: var(--rose);
+  border-color: rgba(178, 59, 74, 0.22);
+}
+
+.badgeNeutral {
+  background: rgba(90, 115, 136, 0.1);
+  color: var(--muted);
+  border-color: rgba(90, 115, 136, 0.2);
+}
+
+.meta {
+  padding: 0.9rem 1.25rem 1.2rem;
+  border-top: 1px solid var(--line);
+  background: #eef3f7;
+}
+
+.meta p {
+  margin: 0.25rem 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.empty {
+  margin: 0;
+  padding: 1.5rem 1.25rem;
+  color: var(--muted);
+}
+
+.disclaimer {
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .filters {
+    grid-template-columns: 1fr;
+  }
+
+  .panelHead {
+    flex-direction: column;
+  }
+
+  .updated {
+    white-space: normal;
+  }
+}

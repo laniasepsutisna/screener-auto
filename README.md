@@ -28,6 +28,18 @@ Output: `reports/top-picks/YYYY-MM-DD.md` + `latest.md`
 ./run_screener.sh all   # atau idx | crypto | us
 ```
 
+## Web dashboard (Vercel)
+
+UI interaktif ada di folder [`web/`](web/) — tab IDX/US/Crypto, filter, sort.
+
+Deploy gratis ke `*.vercel.app`:
+
+1. Import repo di [vercel.com/new](https://vercel.com/new)
+2. Set **Root Directory** = `web`
+3. Deploy
+
+Detail: [`web/README.md`](web/README.md)
+
 ## Cursor Automation (cloud)
 
 1. Repo: `laniasepsutisna/screener-auto` · branch `main`
