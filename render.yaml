@@ -45,3 +45,31 @@ services:
         value: liquid
       - key: US_LIMIT
         value: "30"
+
+  # Evaluation scorecard — Setiap hari 09:00 WIB (02:00 UTC)
+  - type: cron
+    name: evaluation-checkpoint
+    runtime: python
+    schedule: "0 2 * * *"
+    buildCommand: pip install -r requirements.txt
+    startCommand: bash run_evaluation.sh auto
+    envVars:
+      - key: PYTHONIOENCODING
+        value: utf-8
+
+  # Full daily pipeline (top picks + evaluation) — Senin-Jumat 08:30 WIB (01:30 UTC)
+  - type: cron
+    name: daily-pipeline
+    runtime: python
+    schedule: "30 1 * * 1-5"
+    buildCommand: pip install -r requirements.txt
+    startCommand: bash run_daily.sh
+    envVars:
+      - key: PYTHONIOENCODING
+        value: utf-8
+      - key: STRICTNESS
+        value: balanced
+      - key: LIMIT
+        value: "5"
+      - key: EVAL_TYPE
+        value: auto

@@ -3,7 +3,7 @@
   "cycle_id": "cycle-001",
   "type": "checkpoint",
   "date": "2026-09-05",
-  "created_at": "2026-09-05T14:58:08+00:00",
+  "created_at": "2026-09-05T18:43:14+00:00",
   "markets": {
     "idx": {
       "book_id": "idx",
@@ -169,8 +169,8 @@
       "cash_pct": 88.2,
       "portfolio_id": "paper-v2-2026-09-03",
       "entry_date": "2026-09-03",
-      "portfolio_return_pct": 3.33,
-      "portfolio_pnl": 39.25,
+      "portfolio_return_pct": 6.45,
+      "portfolio_pnl": 76.14,
       "winners": 3,
       "losers": 0,
       "positions_total": 3,
@@ -181,37 +181,37 @@
           "symbol": "DOGE",
           "name": "Dogecoin",
           "entry_price": 0.083125,
-          "current_price": 0.087759,
-          "return_pct": 5.57,
-          "pnl": 26.76,
+          "current_price": 0.092328,
+          "return_pct": 11.07,
+          "pnl": 53.14,
           "status": "open",
           "weight_pct": 4.8,
           "quality": "Best",
           "thesis": "Best · underval 11% · TA Selektif · Grade A · R:R 4.24"
         },
         {
-          "symbol": "ALGO",
-          "name": "Algorand",
-          "entry_price": 0.092688,
-          "current_price": 0.095514,
-          "return_pct": 3.05,
-          "pnl": 7.93,
-          "status": "open",
-          "weight_pct": 2.6,
-          "quality": "Bagus",
-          "thesis": "Bagus · underval 94% · TA Selektif · Grade B · R:R 9.45"
-        },
-        {
           "symbol": "BCH",
           "name": "Bitcoin Cash",
           "entry_price": 247.76,
-          "current_price": 250.33,
-          "return_pct": 1.04,
-          "pnl": 4.56,
+          "current_price": 257.38,
+          "return_pct": 3.88,
+          "pnl": 17.08,
           "status": "open",
           "weight_pct": 4.4,
           "quality": "Bagus",
           "thesis": "Bagus · underval 31% · TA Selektif · Grade A · R:R 6.0"
+        },
+        {
+          "symbol": "ALGO",
+          "name": "Algorand",
+          "entry_price": 0.092688,
+          "current_price": 0.094797,
+          "return_pct": 2.28,
+          "pnl": 5.92,
+          "status": "open",
+          "weight_pct": 2.6,
+          "quality": "Bagus",
+          "thesis": "Bagus · underval 94% · TA Selektif · Grade B · R:R 9.45"
         }
       ]
     }
@@ -235,8 +235,8 @@
       "label": "BTC",
       "symbol": "BTC-USD",
       "entry_price": 81271.7421875,
-      "current_price": 79749.640625,
-      "return_pct": -1.87
+      "current_price": 79942.90625,
+      "return_pct": -1.64
     }
   },
   "gate1": null,

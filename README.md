@@ -8,7 +8,7 @@ Pipeline harian: **IDX + US + Crypto** → filter ketat → `reports/top-picks/`
 
 ```bash
 pip install -r requirements.txt
-chmod +x run_top_picks.sh run_screener.sh
+chmod +x run_top_picks.sh run_screener.sh run_evaluation.sh run_daily.sh
 ./run_top_picks.sh
 ```
 
@@ -45,6 +45,28 @@ Output:
 | `reports/evaluation/snapshots/*.json` | Data mentah per evaluasi |
 
 Test: `python3 -m unittest tests.test_evaluate_cycle -v`
+
+## Daily automation (screener + evaluation)
+
+Pipeline gabungan harian:
+
+```bash
+chmod +x run_daily.sh
+./run_daily.sh                         # top picks + evaluation (auto)
+GIT_COMMIT=1 ./run_daily.sh            # + commit & push reports
+SKIP_TOP_PICKS=1 ./run_daily.sh        # evaluation saja
+EVAL_TYPE=checkpoint ./run_daily.sh    # paksa checkpoint
+```
+
+**GitHub Actions:** `.github/workflows/daily-pipeline.yml` — jalan otomatis **09:00 WIB** setiap hari, commit & push `reports/`.
+
+**Render Cron:** `render.yaml` — `evaluation-checkpoint` (harian) + `daily-pipeline` (Sen–Jum 08:30 WIB).
+
+| Waktu (WIB) | Job | Isi |
+|-------------|-----|-----|
+| 08:30 Sen–Jum | `daily-pipeline` | Top picks + evaluation |
+| 09:00 setiap hari | `evaluation-checkpoint` | Evaluation saja (crypto 24/7) |
+| 08:00 Sen–Jum | Cursor Automation | `./run_top_picks.sh` (jika di-setup) |
 
 ## Screener terpisah (legacy)
 
