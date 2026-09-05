@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "updated_at": "2026-09-05T21:37:52+00:00",
+  "active_cycle_id": "cycle-001",
+  "go_live": {
+    "gate1_passed": false,
+    "gate1_passed_at": null,
+    "gate2_passed": false,
+    "gate2_passed_at": null,
+    "gate3_pilot_started": false,
+    "gate3_pilot_started_at": null,
+    "gate4_full_deployment": false,
+    "ready_for_real_money": false,
+    "notes": []
+  },
+  "cycles": [
+    {
+      "id": "cycle-001",
+      "gate_target": "gate1",
+      "status": "active",
+      "entry_date": "2026-09-03",
+      "end_date": "2026-09-24",
+      "checkpoint_dates": [
+        "2026-09-10"
+      ],
+      "hold_days": 21,
+      "portfolio_ids": {
+        "idx": "dry-run-week1b-qc-2026-09-03",
+        "us": "paper-us-v1-2026-09-03",
+        "crypto": "paper-v2-2026-09-03"
+      },
+      "benchmark_entry": {
+        "captured_at": "2026-09-05T14:58:07+00:00",
+        "entry_date": "2026-09-03",
+        "idx": 6667.89111328125,
+        "us": 773.1699829101562,
+        "crypto": 81271.7421875
+      },
+      "evaluations": [
+        {
+          "id": "eval-cycle-001-2026-09-05-checkpoint",
+          "date": "2026-09-05",
+          "type": "checkpoint",
+          "snapshot": "reports/evaluation/snapshots/eval-cycle-001-2026-09-05-checkpoint.json",
+          "report": "reports/evaluation/reports/2026-09-05-checkpoint.md"
+        },
+        {
+          "id": "eval-cycle-001-2026-09-05-gate1",
+          "date": "2026-09-05",
+          "type": "gate1",
+          "snapshot": "reports/evaluation/snapshots/eval-cycle-001-2026-09-05-gate1.json",
+          "report": "reports/evaluation/reports/2026-09-05-gate1.md"
+        }
+      ],
+      "gate1_result": null,
+      "lessons": [
+        "IDX INKP melemah (-1.58%) — pantau thesis",
+        "US T melemah (-1.04%) — pantau thesis",
+        "US COP melemah (-2.14%) — pantau thesis",
+        "Gate gagal — ulang paper trade, jangan real money"
+      ],
+      "improvements": [
+        "IDX: pertimbangkan filter sektor (hindari kertas/siklikal lemah bersamaan)",
+        "US: prioritaskan saham dengan UV tertinggi + guidance Beli (bukan Tunggu)",
+        "Crypto: cash idle tinggi sudah benar saat makro risk-off — pertahankan",
+        "Catat secara manual pelanggaran proses (chase, ignore SL) di --lessons"
+      ],
+      "gate1_preview": {
+        "process_sl_respected": true,
+        "idx_return_ok": true,
+        "idx_winners_ok": true,
+        "idx_beat_benchmark": true,
+        "us_return_ok": true,
+        "us_beat_benchmark": false,
+        "crypto_sl_ok": true,
+        "crypto_return_ok": true
+      }
+    }
+  ]
+}

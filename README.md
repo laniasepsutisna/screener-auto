@@ -8,7 +8,7 @@ Pipeline harian: **IDX + US + Crypto** → filter ketat → `reports/top-picks/`
 
 ```bash
 pip install -r requirements.txt
-chmod +x run_top_picks.sh run_screener.sh
+chmod +x run_top_picks.sh run_screener.sh run_evaluation.sh run_daily.sh
 ./run_top_picks.sh
 ```
 
@@ -21,6 +21,52 @@ Env opsional:
 | `SKIP_IDX` / `SKIP_US` / `SKIP_CRYPTO` | `0` | set `1` untuk skip |
 
 Output: `reports/top-picks/YYYY-MM-DD.md` + `latest.md`
+
+## Evaluation scorecard (paper trade → go-live)
+
+Tracking checkpoint & gate per siklus paper trade:
+
+```bash
+chmod +x run_evaluation.sh
+./run_evaluation.sh                  # checkpoint otomatis
+./run_evaluation.sh checkpoint       # paksa checkpoint
+./run_evaluation.sh gate1            # preview gate1 (final otomatis di end_date)
+LESSONS="INKP lemah" ./run_evaluation.sh checkpoint
+```
+
+Output:
+
+| File | Isi |
+|------|-----|
+| `reports/evaluation/cycles.json` | Registry siklus + riwayat evaluasi |
+| `reports/evaluation/gates.json` | Kriteria gate 1–4 |
+| `reports/evaluation/go-live-decision.json` | Tracker keputusan real money |
+| `reports/evaluation/reports/latest.md` | Laporan evaluasi terbaru |
+| `reports/evaluation/snapshots/*.json` | Data mentah per evaluasi |
+
+Test: `python3 -m unittest tests.test_evaluate_cycle -v`
+
+## Daily automation (screener + evaluation)
+
+Pipeline gabungan harian:
+
+```bash
+chmod +x run_daily.sh
+./run_daily.sh                         # top picks + evaluation (auto)
+GIT_COMMIT=1 ./run_daily.sh            # + commit & push reports
+SKIP_TOP_PICKS=1 ./run_daily.sh        # evaluation saja
+EVAL_TYPE=checkpoint ./run_daily.sh    # paksa checkpoint
+```
+
+**GitHub Actions:** `.github/workflows/daily-pipeline.yml` — jalan otomatis **09:00 WIB** setiap hari, commit & push `reports/`.
+
+**Render Cron:** `render.yaml` — `evaluation-checkpoint` (harian) + `daily-pipeline` (Sen–Jum 08:30 WIB).
+
+| Waktu (WIB) | Job | Isi |
+|-------------|-----|-----|
+| 08:30 Sen–Jum | `daily-pipeline` | Top picks + evaluation |
+| 09:00 setiap hari | `evaluation-checkpoint` | Evaluation saja (crypto 24/7) |
+| 08:00 Sen–Jum | Cursor Automation | `./run_top_picks.sh` (jika di-setup) |
 
 ## Screener terpisah (legacy)
 
