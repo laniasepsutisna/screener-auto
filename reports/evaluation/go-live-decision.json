@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "updated_at": null,
+  "decision": "belum",
+  "summary": "Tunggu minimal 2 siklus gate1 PASS sebelum pilot real money.",
+  "requirements": {
+    "gate1_passes_needed": 2,
+    "gate1_passes_current": 0,
+    "pilot_idx_capital_pct_max": 20,
+    "pilot_us_capital_pct_max": 10,
+    "pilot_crypto_capital_pct_max": 5
+  },
+  "history": []
+}

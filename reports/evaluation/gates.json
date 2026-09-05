@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "description": "Kriteria gate go-live untuk paper trade → real money",
+  "gates": {
+    "gate1": {
+      "label": "Siklus paper trade #1 selesai",
+      "when": "Akhir siklus 21 hari (end_date)",
+      "criteria": {
+        "process_sl_respected": "Tidak ada SL hit yang diabaikan (hit_sl = 0 atau exit tercatat)",
+        "idx_return_min_pct": 0.0,
+        "idx_winners_min": 3,
+        "idx_beat_benchmark": "return >= benchmark IHSG",
+        "us_return_min_pct": -2.0,
+        "us_beat_benchmark": "return >= benchmark SPY (opsional jika return >= min)",
+        "crypto_sl_hit_max": 0,
+        "crypto_invested_return_min_pct": -5.0,
+        "no_chase": "Tidak tambah posisi saat screener 0 kandidat (crypto)"
+      },
+      "pass_requires": "process_sl_respected AND idx (return>=min OR beat_ihsg) AND us (return>=min) AND crypto (sl_hit=0)"
+    },
+    "gate2": {
+      "label": "2-3 siklus paper trade sukses",
+      "when": "Setelah 2+ siklus gate1 PASS",
+      "criteria": {
+        "gate1_pass_count_min": 2,
+        "avg_return_min_pct": 0.0,
+        "max_drawdown_max_pct": 15.0
+      }
+    },
+    "gate3": {
+      "label": "Pilot real money kecil",
+      "when": "Manual setelah gate2 PASS",
+      "criteria": {
+        "pilot_idx_capital_pct_max": 20,
+        "pilot_us_capital_pct_max": 10,
+        "pilot_crypto_capital_pct_max": 5,
+        "pilot_duration_days": 21
+      }
+    },
+    "gate4": {
+      "label": "Full deployment",
+      "when": "Manual setelah pilot 6+ bulan",
+      "criteria": {
+        "pilot_cycles_pass_min": 1,
+        "months_track_record_min": 6
+      }
+    }
+  },
+  "checkpoint": {
+    "label": "Review mingguan / snapshot",
+    "when": "review_at atau setiap run manual",
+    "note": "Checkpoint tidak menentukan pass/fail gate — hanya mencatat progres"
+  }
+}

@@ -22,6 +22,30 @@ Env opsional:
 
 Output: `reports/top-picks/YYYY-MM-DD.md` + `latest.md`
 
+## Evaluation scorecard (paper trade → go-live)
+
+Tracking checkpoint & gate per siklus paper trade:
+
+```bash
+chmod +x run_evaluation.sh
+./run_evaluation.sh                  # checkpoint otomatis
+./run_evaluation.sh checkpoint       # paksa checkpoint
+./run_evaluation.sh gate1            # preview gate1 (final otomatis di end_date)
+LESSONS="INKP lemah" ./run_evaluation.sh checkpoint
+```
+
+Output:
+
+| File | Isi |
+|------|-----|
+| `reports/evaluation/cycles.json` | Registry siklus + riwayat evaluasi |
+| `reports/evaluation/gates.json` | Kriteria gate 1–4 |
+| `reports/evaluation/go-live-decision.json` | Tracker keputusan real money |
+| `reports/evaluation/reports/latest.md` | Laporan evaluasi terbaru |
+| `reports/evaluation/snapshots/*.json` | Data mentah per evaluasi |
+
+Test: `python3 -m unittest tests.test_evaluate_cycle -v`
+
 ## Screener terpisah (legacy)
 
 ```bash
